@@ -2,6 +2,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="dev.bingo.a4330.bingo">
 
+
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />//added by megan
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" /> //added by megan
+    <uses-permission android:name="android.permission.CAMERA" /> //added by megan
+    <uses-feature android:name="android.hardware.camera" android:required="false" /> //added by megan
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -16,8 +22,24 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="${applicationId}.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/filepaths" />
+            >
+        </provider> //all of the provider was added by megan
+
+
+
         <activity android:name=".activityLog" />
         <activity android:name=".trackWalk"></activity>
+        <activity android:name=".ViewPhotoActivity"></activity>
+        <activity android:name=".GalleryHomepage"></activity>
     </application>
 
 </manifest>
