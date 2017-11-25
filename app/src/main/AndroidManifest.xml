@@ -16,6 +16,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".activityLog" />
+        <activity android:name=".trackWalk"></activity>
     </application>
 
 </manifest>
