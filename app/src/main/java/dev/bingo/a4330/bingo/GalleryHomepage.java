@@ -55,8 +55,8 @@ public class GalleryHomepage extends AppCompatActivity implements ImageAdapter.C
         super.onCreate(savedInstanceState);
         setContentView(R.layout.galleryhomepage);
 
-        //identifies button to add photos and sets the button to check that the user has granted
-        // permission to use camera and access photos when clicked, before calling the camera or accessing photos
+        //identifies button to add photos and sets the button to check that the user has granted.
+        // permission to use camera and access photos when clicked, before calling the camera or accessing photos.
         addPhotosButton = findViewById(R.id.addButton);
         addPhotosButton.setOnClickListener(new View.OnClickListener()
         {
