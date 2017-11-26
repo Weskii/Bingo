@@ -114,7 +114,7 @@ public class GalleryHomepage extends AppCompatActivity implements ImageAdapter.C
     // requests read,write, and camera permissions from the user.
     private void requestPermission()
     {
-        String[] PERMISSIONS = { Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE,  Manifest.permission.CAMERA};
+        String[] PERMISSIONS = { Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.WRITE_EXTERNAL_STORAGE,  Manifest.permission.CAMERA};
         ActivityCompat.requestPermissions(this, PERMISSIONS, RequestPermissionCode);
 
     }
@@ -143,7 +143,7 @@ public class GalleryHomepage extends AppCompatActivity implements ImageAdapter.C
                     if (CameraPermission && ReadExternalStatePermission && ReadWriteStatePermission)
                         showDialog();
                     else
-                        Toast.makeText(this, "You Must Accept All Permissions To Add Photos", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(this, "You must accept all permissions to add photos to the gallery.", Toast.LENGTH_SHORT).show();
                 }
                 break;
             default:
