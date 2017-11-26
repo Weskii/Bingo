@@ -17,8 +17,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".activityLog" />
-        <activity android:name=".trackWalk" />
-        <activity android:name=".FirstRun"></activity>
+        <activity android:name=".trackWalk"></activity>
     </application>
 
 </manifest>

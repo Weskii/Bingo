@@ -20,4 +20,11 @@ public class HomeScreen extends AppCompatActivity {
         Intent activityLog = new Intent(this, activityLog.class);
         startActivity(activityLog);
     }
+
+    public void cameraButton(View view) {
+        Intent gallery = new Intent(this, GalleryHomepage.class);
+        startActivity(gallery);
+    }
+
+
 }

@@ -4,7 +4,7 @@ android {
     compileSdkVersion 26
     defaultConfig {
         applicationId "dev.bingo.a4330.bingo"
-        minSdkVersion 15
+        minSdkVersion 24 //changed from 16 to 24 to target nougat
         targetSdkVersion 26
         versionCode 1
         versionName "1.0"
@@ -26,4 +26,6 @@ dependencies {
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
     implementation 'com.google.android.gms:play-services-maps:11.6.0'
+    compile 'com.android.support:appcompat-v7:26.1.0' //added by megan
+    compile 'com.android.support:recyclerview-v7:26.1.0' //added by megan
 }
