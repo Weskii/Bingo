@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">Bingo</string>
+    <string name="petName">Pet Name</string>
+    <string name="petWeight">Pet Weight</string>
+    <string name="addPetButton">Add Pet</string>
+    <string name="activityName">Activity Name</string>
+    <string name="activityTime">Activity Time</string>
+    <string name="activityDate">Activity Date</string>
+    <string name="appointName">Appointment Name</string>
+    <string name="appointDate">Appointment Date</string>
+    <string name="appointTime">Appointment Time</string>
+    <string name="appointNotes">Appointment Notes</string>
 </resources>
