@@ -5,6 +5,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
+import android.media.ExifInterface;
 import android.provider.ContactsContract;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -16,11 +18,13 @@ import android.widget.ImageView;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 
 import javax.security.auth.callback.Callback;
 
 public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ViewHolder>
 {
+
 
     private static File imagesFile;
     View ImageView;
@@ -69,7 +73,39 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ViewHolder>
 
         // Bitmap imageBitmap = BitmapFactory.decodeFile(imageFile.getAbsolutePath());
        Bitmap imageBitmap = BitmapFactory.decodeStream(is, null, options);
-       holder.getImageView().setImageBitmap(imageBitmap);
+
+       //calls an exif interface to display the correct orientation of the image based on Exif data
+        try {
+            ExifInterface exif = new ExifInterface(imageFile.getAbsolutePath());
+           int orientation = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION,ExifInterface.ORIENTATION_UNDEFINED);
+            Bitmap rotatedBitmap = null;
+            switch(orientation) {
+
+                case ExifInterface.ORIENTATION_ROTATE_90:
+                    rotatedBitmap = ImageAdapter.rotateImage(imageBitmap, 90);
+                    break;
+
+                case ExifInterface.ORIENTATION_ROTATE_180:
+                    rotatedBitmap = ImageAdapter.rotateImage(imageBitmap, 180);
+                    break;
+
+                case ExifInterface.ORIENTATION_ROTATE_270:
+                    rotatedBitmap = ImageAdapter.rotateImage(imageBitmap, 270);
+                    break;
+
+                case ExifInterface.ORIENTATION_NORMAL:
+                default:
+                    rotatedBitmap = imageBitmap;
+
+            }
+            holder.getImageView().setImageBitmap(rotatedBitmap);
+
+
+        } catch (IOException e)
+        {
+            e.printStackTrace();
+        }
+
 
         //a listener that returns the image's filepath provided the callback is not null
         holder.getImageView().setOnClickListener(new View.OnClickListener()
@@ -85,6 +121,28 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ViewHolder>
 
 
     }
+
+    //method for rotating bitmap, returning the rotated bitmap.
+    /*public static Bitmap rotate(Bitmap bitmap, int degree)
+    {
+        int w = bitmap.getWidth();
+        int h = bitmap.getHeight();
+
+        Matrix mtx = new Matrix();
+        mtx.postRotate(degree);
+
+        return Bitmap.createBitmap(bitmap, 0, 0, w, h, mtx, true);
+    }*/
+
+    public static Bitmap rotateImage(Bitmap source, float angle) {
+        Matrix matrix = new Matrix();
+        matrix.postRotate(angle);
+        return Bitmap.createBitmap(source, 0, 0, source.getWidth(), source.getHeight(),
+                matrix, true);
+    }
+
+
+
     //returns the amount of items in the file if the file is not null.
     @Override
     public int getItemCount()

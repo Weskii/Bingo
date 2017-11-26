@@ -126,7 +126,7 @@ public class GalleryHomepage extends AppCompatActivity implements ImageAdapter.C
     {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
 
-        /*switch that reads the request code and responds providing it is equal to the requestpermissioncode, if there has been an error and the requestpermission code is incorrect
+        /*reads the request code and responds providing it is equal to the requestpermissioncode, if there has been an error and the requestpermission code is incorrect
         the switch exits */
         switch (requestCode) {
             case RequestPermissionCode:

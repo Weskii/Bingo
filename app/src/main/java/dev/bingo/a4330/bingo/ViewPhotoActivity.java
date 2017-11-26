@@ -3,6 +3,7 @@ package dev.bingo.a4330.bingo;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.media.ExifInterface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -13,6 +14,7 @@ import android.content.Intent;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 
 public class ViewPhotoActivity extends AppCompatActivity {
     private Button ChangeProfileButton;
@@ -40,11 +42,38 @@ public class ViewPhotoActivity extends AppCompatActivity {
             e.printStackTrace();
         }
         options.inSampleSize = 2;
-
-        // Bitmap imageBitmap = BitmapFactory.decodeFile(imageFile.getAbsolutePath());
         Bitmap imageBitmap = BitmapFactory.decodeStream(is, null, options);
-        //Bitmap b = BitmapFactory.decodeFile(path);
-        imageView.setImageBitmap(imageBitmap);
+        try {
+            ExifInterface exif = new ExifInterface(path);
+            int orientation = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION,ExifInterface.ORIENTATION_UNDEFINED);
+            Bitmap rotatedBitmap = null;
+            switch(orientation) {
+
+                case ExifInterface.ORIENTATION_ROTATE_90:
+                    rotatedBitmap = ImageAdapter.rotateImage(imageBitmap, 90);
+                    break;
+
+                case ExifInterface.ORIENTATION_ROTATE_180:
+                    rotatedBitmap = ImageAdapter.rotateImage(imageBitmap, 180);
+                    break;
+
+                case ExifInterface.ORIENTATION_ROTATE_270:
+                    rotatedBitmap = ImageAdapter.rotateImage(imageBitmap, 270);
+                    break;
+
+                case ExifInterface.ORIENTATION_NORMAL:
+                default:
+                    rotatedBitmap = imageBitmap;
+
+            }
+            imageView.setImageBitmap(rotatedBitmap);
+
+
+        } catch (IOException e)
+        {
+            e.printStackTrace();
+        }
+
 
 
 
