@@ -5,13 +5,17 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.provider.ContactsContract;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 
 import javax.security.auth.callback.Callback;
 
@@ -19,6 +23,7 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ViewHolder>
 {
 
     private static File imagesFile;
+    View ImageView;
     //an interface used to create the onclick listener for the recyclerview
     public interface Callback
     {
@@ -48,8 +53,23 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ViewHolder>
     {
         //gets image in the directory according to it's position in the recyclerview and sets the image to display
         final File imageFile = imagesFile.listFiles()[position];
-        Bitmap imageBitmap = BitmapFactory.decodeFile(imageFile.getAbsolutePath());
-        holder.getImageView().setImageBitmap(imageBitmap);
+
+        //reduces the size of the images so the app does not run out of memory displaying multiple images
+        BitmapFactory.Options options = new BitmapFactory.Options();
+        FileInputStream is = null;
+        try
+        {
+            is = new FileInputStream(imageFile);
+        }
+        catch (FileNotFoundException e)
+        {
+            e.printStackTrace();
+        }
+        options.inSampleSize = 8;
+
+        // Bitmap imageBitmap = BitmapFactory.decodeFile(imageFile.getAbsolutePath());
+       Bitmap imageBitmap = BitmapFactory.decodeStream(is, null, options);
+       holder.getImageView().setImageBitmap(imageBitmap);
 
         //a listener that returns the image's filepath provided the callback is not null
         holder.getImageView().setOnClickListener(new View.OnClickListener()

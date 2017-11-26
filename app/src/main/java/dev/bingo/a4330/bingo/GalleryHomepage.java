@@ -312,9 +312,12 @@ public class GalleryHomepage extends AppCompatActivity implements ImageAdapter.C
         //needed to override this method to implement the Callback class, but onPointerCaptureChanged is not used, so it was left as is.
 
     }
-
-    private void deleteBlankImage(final Context context, String path, final File file)
+    //overrides the back button in order to return the user to the homescreen
+    @Override
+    public void onBackPressed()
     {
-
+        moveTaskToBack(true);
+        Intent backToHomescreen = new Intent(this,HomeScreen.class);
+        this.startActivity(backToHomescreen);
     }
 }
