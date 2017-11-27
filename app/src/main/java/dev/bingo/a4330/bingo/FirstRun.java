@@ -2,14 +2,18 @@ package dev.bingo.a4330.bingo;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Typeface;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
 
 public class FirstRun extends AppCompatActivity {
     public static SharedPreferences firstRun;
     public static SharedPreferences.Editor spEdit;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

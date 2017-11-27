@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="dev.bingo.a4330.bingo.FirstRun">
+    tools:context="dev.bingo.a4330.bingo.FirstRun"
+    >
 
     <TextView
         android:id="@+id/WelcomeText"
@@ -12,34 +13,69 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="32dp"
-        android:text="Welcome to Bingo!"
+        android:layout_marginTop="68dp"
+        android:fontFamily="@font/odin_rounded"
+        android:text="WELCOME TO BINGO!"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:textSize="36sp" />
 
     <TextView
-        android:id="@+id/StartupText"
+        android:id="@+id/StartupTextA"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="52dp"
+        android:fontFamily="@font/odin_rounded"
+        android:text="LET'S GET YOU AND YOUR"
+        android:textSize="30sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/BingoIcon" />
+
+    <TextView
+        android:id="@+id/StartupTextB"
         android:layout_width="wrap_content"
         android:layout_height="103dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="28dp"
-        android:text="Let's get you and your furry friend taken care of!"
+        android:layout_marginTop="92dp"
+        android:fontFamily="@font/odin_rounded"
+        android:text="FURRY FRIEND TAKEN"
+        android:textSize="30sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.505"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/BingoIcon" />
+
+    <TextView
+        android:id="@+id/StartupTextC"
+        android:layout_width="wrap_content"
+        android:layout_height="103dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="132dp"
+        android:fontFamily="@font/odin_rounded"
+        android:text=" CARE OF!"
+        android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/BingoIcon" />
 
     <ImageButton
         android:id="@+id/BingoIcon"
-        android:layout_width="72dp"
-        android:layout_height="68dp"
+        android:layout_width="170dp"
+        android:layout_height="170dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="36dp"
+        android:layout_marginTop="48dp"
+        android:background="@drawable/blue_circle"
         android:onClick="newDogButton"
+        android:scaleType="fitXY"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/WelcomeText"
-        app:srcCompat="@drawable/common_google_signin_btn_icon_dark_focused" />
+        app:srcCompat="@drawable/bingo_clear" />
 </android.support.constraint.ConstraintLayout>
