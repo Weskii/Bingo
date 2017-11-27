@@ -66,8 +66,8 @@
 
     <ImageButton
         android:id="@+id/BingoIcon"
-        android:layout_width="170dp"
-        android:layout_height="170dp"
+        android:layout_width="180dp"
+        android:layout_height="180dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="48dp"

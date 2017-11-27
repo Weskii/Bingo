@@ -10,25 +10,24 @@ import android.view.View;
 import android.widget.TextView;
 
 public class FirstRun extends AppCompatActivity {
-    public static SharedPreferences firstRun;
-    public static SharedPreferences.Editor spEdit;
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_first_run);
-        firstRun = PreferenceManager.getDefaultSharedPreferences(this);
-        if (firstRun.getBoolean("isFirstRun", true)) {
+        SharedPreferences firstRun=getSharedPreferences("bingo.dsp",0);
+        if (firstRun.contains("isNotFirstRun")) {
             Intent homeScreenIntent = new Intent(this, HomeScreen.class);
             startActivity(homeScreenIntent);
             finish();
         }
     }
     public void newDogButton(View view) {
-        spEdit.putBoolean("isFirstRun",false);
-        //Intent newDog=new Intent(this,newDog.class);
-        //startActivity(newDog);
+        SharedPreferences firstRun=getSharedPreferences("bingo.dsp",0);
+        SharedPreferences.Editor spEdit=firstRun.edit();
+        spEdit.putBoolean("isNotFirstRun",true);
+        spEdit.commit();
+        Intent newDog=new Intent(this,HomeScreen.class);
+        startActivity(newDog);
     }
 }
 
