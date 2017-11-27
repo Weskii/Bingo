@@ -45,6 +45,8 @@
         <activity android:name=".ViewPhotoActivity"></activity>
         <activity android:name=".GalleryHomepage"></activity>
         <activity android:name=".ImageViewer"></activity>
+        <activity android:name=".HomeScreen"></activity>
+
     </application>
 
 </manifest>

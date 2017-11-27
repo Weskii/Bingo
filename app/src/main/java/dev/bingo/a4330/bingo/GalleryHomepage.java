@@ -22,6 +22,7 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import java.io.ByteArrayOutputStream;
@@ -39,7 +40,7 @@ import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
 
 public class GalleryHomepage extends AppCompatActivity implements ImageAdapter.Callback
 {
-    private Button addPhotosButton;
+    private ImageButton addPhotosButton;
     private int GALLERY = 1,
             CAMERAINTENT = 0;
     final int RequestPermissionCode = 0;
