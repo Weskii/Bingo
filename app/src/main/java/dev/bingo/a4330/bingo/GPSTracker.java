@@ -1,7 +1,6 @@
 package dev.bingo.a4330.bingo;
 
 import android.app.AlertDialog;
-import android.app.Service;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -9,14 +8,12 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
-import android.os.IBinder;
 import android.provider.Settings;
 import android.util.Log;
 
-public class GPSTracker extends Service implements LocationListener {
+public class GPSTracker extends activityLog implements LocationListener {
 
     private final Context mContext;
-
     boolean isGPSEnabled = false; // flag for GPS status
     boolean isNetworkEnabled = false; // flag for network status
     boolean canGetLocation = false; // flag for GPS status
@@ -87,11 +84,9 @@ public class GPSTracker extends Service implements LocationListener {
                     }
                 }
             }
-
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (SecurityException e) {
+            //do nothing with this exception because we check for these permissions in trackWalk.java;
         }
-
         return location;
     }
 
@@ -112,7 +107,6 @@ public class GPSTracker extends Service implements LocationListener {
         if(location != null){
             latitude = location.getLatitude();
         }
-
         // return latitude
         return latitude;
     }
@@ -124,7 +118,6 @@ public class GPSTracker extends Service implements LocationListener {
         if(location != null){
             longitude = location.getLongitude();
         }
-
         // return longitude
         return longitude;
     }
@@ -147,7 +140,7 @@ public class GPSTracker extends Service implements LocationListener {
         // Setting Dialog Title
         alertDialog.setTitle("GPS is settings");
 
-        // Setting Dialog Message
+        // Setting Dialog    Message
         alertDialog.setMessage("GPS is not enabled. Do you want to go to settings menu?");
 
         // On pressing Settings button
@@ -170,23 +163,14 @@ public class GPSTracker extends Service implements LocationListener {
     }
 
     @Override
-    public void onLocationChanged(Location location) {
-    }
+    public void onLocationChanged(Location location) {}
 
     @Override
-    public void onProviderDisabled(String provider) {
-    }
+    public void onProviderDisabled(String provider) {}
 
     @Override
-    public void onProviderEnabled(String provider) {
-    }
+    public void onProviderEnabled(String provider) {}
 
     @Override
-    public void onStatusChanged(String provider, int status, Bundle extras) {
-    }
-
-    @Override
-    public IBinder onBind(Intent arg0) {
-        return null;
-    }
+    public void onStatusChanged(String provider, int status, Bundle extras) {}
 }
