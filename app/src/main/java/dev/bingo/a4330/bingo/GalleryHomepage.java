@@ -167,7 +167,7 @@ public class GalleryHomepage extends AppCompatActivity implements ImageAdapter.C
     //handles the case in the dialog switch in which the user opts to take a photo.
     private void takePhotoFromCamera()
     {
-       
+
         Intent callCameraApplicationIntent = new Intent();
         callCameraApplicationIntent.setAction(MediaStore.ACTION_IMAGE_CAPTURE);
 
