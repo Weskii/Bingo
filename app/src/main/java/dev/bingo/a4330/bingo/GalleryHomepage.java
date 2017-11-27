@@ -47,7 +47,6 @@ public class GalleryHomepage extends AppCompatActivity implements ImageAdapter.C
     public File storageDirectory = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
     public File BingoGalleryFolder = new File(storageDirectory,galleryLocation);
     private RecyclerView recycleView;
-
     String currentPath ="";
 
 
@@ -141,7 +140,7 @@ public class GalleryHomepage extends AppCompatActivity implements ImageAdapter.C
                     if (CameraPermission && ReadExternalStatePermission && ReadWriteStatePermission)
                         showDialog();
                     else
-                        Toast.makeText(this, "You Must Accept All Permissions To Add Photos", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(this, "You must accept all permissions to add photos to the gallery.", Toast.LENGTH_SHORT).show();
                 }
 
     }
@@ -160,14 +159,12 @@ public class GalleryHomepage extends AppCompatActivity implements ImageAdapter.C
     public void choosePhotoFromGallery()
     {
         Intent galleryIntent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-
         startActivityForResult(galleryIntent, GALLERY);
     }
 
     //handles the case in the dialog switch in which the user opts to take a photo.
     private void takePhotoFromCamera()
     {
-
         Intent callCameraApplicationIntent = new Intent();
         callCameraApplicationIntent.setAction(MediaStore.ACTION_IMAGE_CAPTURE);
 

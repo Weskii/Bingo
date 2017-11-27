@@ -6,6 +6,8 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />//added by megan
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" /> //added by megan
     <uses-permission android:name="android.permission.CAMERA" /> //added by megan
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" /> //added by westen
+    <uses-permission android:name="android.permission.INTERNET" /> //added by westen
     <uses-feature android:name="android.hardware.camera" android:required="false" /> //added by megan
      //large heap added
     <application
@@ -16,7 +18,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".HomeScreen">
+        <activity android:name=".FirstRun">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -41,7 +43,8 @@
         <activity android:name=".trackWalk"></activity>
         <activity android:name=".ViewPhotoActivity"></activity>
         <activity android:name=".GalleryHomepage"></activity>
+        <activity android:name=".trackWalk" />
+        <activity android:name=".ImageViewer"></activity>
     </application>
-
 
 </manifest>
