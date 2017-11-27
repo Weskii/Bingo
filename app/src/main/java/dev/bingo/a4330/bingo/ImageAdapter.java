@@ -22,6 +22,8 @@ import java.io.IOException;
 
 import javax.security.auth.callback.Callback;
 
+
+
 public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ViewHolder>
 {
 
@@ -71,10 +73,10 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ViewHolder>
         }
         options.inSampleSize = 8;
 
-        // Bitmap imageBitmap = BitmapFactory.decodeFile(imageFile.getAbsolutePath());
        Bitmap imageBitmap = BitmapFactory.decodeStream(is, null, options);
 
        //calls an exif interface to display the correct orientation of the image based on Exif data
+
         try {
             ExifInterface exif = new ExifInterface(imageFile.getAbsolutePath());
            int orientation = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION,ExifInterface.ORIENTATION_UNDEFINED);
@@ -82,23 +84,25 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ViewHolder>
             switch(orientation) {
 
                 case ExifInterface.ORIENTATION_ROTATE_90:
-                    rotatedBitmap = ImageAdapter.rotateImage(imageBitmap, 90);
+                rotatedBitmap = ImageAdapter.rotateImage(imageBitmap, 90);
                     break;
 
                 case ExifInterface.ORIENTATION_ROTATE_180:
-                    rotatedBitmap = ImageAdapter.rotateImage(imageBitmap, 180);
+                rotatedBitmap = ImageAdapter.rotateImage(imageBitmap, 180);
                     break;
 
                 case ExifInterface.ORIENTATION_ROTATE_270:
-                    rotatedBitmap = ImageAdapter.rotateImage(imageBitmap, 270);
+                rotatedBitmap = ImageAdapter.rotateImage(imageBitmap, 270);
                     break;
 
                 case ExifInterface.ORIENTATION_NORMAL:
                 default:
-                    rotatedBitmap = imageBitmap;
+                rotatedBitmap = imageBitmap;
 
             }
             holder.getImageView().setImageBitmap(rotatedBitmap);
+
+
 
 
         } catch (IOException e)
@@ -107,11 +111,17 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ViewHolder>
         }
 
 
+
+
+
+
+
         //a listener that returns the image's filepath provided the callback is not null
         holder.getImageView().setOnClickListener(new View.OnClickListener()
         {
             @Override
-            public void onClick(View v) {
+            public void onClick(View v)
+            {
                 if (myCallback!=null)
                 {
                     myCallback.onImageClicked(imageFile.getAbsolutePath());
@@ -122,17 +132,10 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ViewHolder>
 
     }
 
+
+
+
     //method for rotating bitmap, returning the rotated bitmap.
-    /*public static Bitmap rotate(Bitmap bitmap, int degree)
-    {
-        int w = bitmap.getWidth();
-        int h = bitmap.getHeight();
-
-        Matrix mtx = new Matrix();
-        mtx.postRotate(degree);
-
-        return Bitmap.createBitmap(bitmap, 0, 0, w, h, mtx, true);
-    }*/
 
     public static Bitmap rotateImage(Bitmap source, float angle) {
         Matrix matrix = new Matrix();

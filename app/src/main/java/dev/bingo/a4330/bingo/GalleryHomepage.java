@@ -7,6 +7,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.media.ExifInterface;
 import android.media.MediaScannerConnection;
 import android.net.Uri;
 import android.os.Bundle;
@@ -46,6 +47,7 @@ public class GalleryHomepage extends AppCompatActivity implements ImageAdapter.C
     public File storageDirectory = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
     public File BingoGalleryFolder = new File(storageDirectory,galleryLocation);
     private RecyclerView recycleView;
+
     String currentPath ="";
 
 
@@ -115,7 +117,7 @@ public class GalleryHomepage extends AppCompatActivity implements ImageAdapter.C
     private void requestPermission()
     {
         String[] PERMISSIONS = { Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE,  Manifest.permission.CAMERA};
-        ActivityCompat.requestPermissions(this, PERMISSIONS, RequestPermissionCode);
+        ActivityCompat.requestPermissions(this, PERMISSIONS, 0);
 
     }
 
@@ -126,10 +128,6 @@ public class GalleryHomepage extends AppCompatActivity implements ImageAdapter.C
     {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
 
-        /*reads the request code and responds providing it is equal to the requestpermissioncode, if there has been an error and the requestpermission code is incorrect
-        the switch exits */
-        switch (requestCode) {
-            case RequestPermissionCode:
                 if (grantResults.length > 0)
                 {
                     //checks to see if each permission was granted individually
@@ -145,10 +143,7 @@ public class GalleryHomepage extends AppCompatActivity implements ImageAdapter.C
                     else
                         Toast.makeText(this, "You Must Accept All Permissions To Add Photos", Toast.LENGTH_SHORT).show();
                 }
-                break;
-            default:
-                break;
-        }
+
     }
 
     //used in the default check permissions call, returns true if all permissions are already accepted when the user clicks "Add Image".
@@ -165,12 +160,14 @@ public class GalleryHomepage extends AppCompatActivity implements ImageAdapter.C
     public void choosePhotoFromGallery()
     {
         Intent galleryIntent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+
         startActivityForResult(galleryIntent, GALLERY);
     }
 
     //handles the case in the dialog switch in which the user opts to take a photo.
     private void takePhotoFromCamera()
     {
+       
         Intent callCameraApplicationIntent = new Intent();
         callCameraApplicationIntent.setAction(MediaStore.ACTION_IMAGE_CAPTURE);
 
@@ -245,8 +242,8 @@ public class GalleryHomepage extends AppCompatActivity implements ImageAdapter.C
 
 
     //creates image files when they are taken using a camera.
-    File createImageFile() throws IOException {
-
+    File createImageFile() throws IOException
+    {
         //creates an image file name
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
         String imageFileName = "IMAGE_" + timeStamp + "_";
@@ -283,7 +280,6 @@ public class GalleryHomepage extends AppCompatActivity implements ImageAdapter.C
             FileOutputStream fo = new FileOutputStream(f);
             fo.write(bytes.toByteArray());
             MediaScannerConnection.scanFile(this, new String[]{f.getPath()}, new String[]{"image/jpeg"}, null);
-            //Log.d("TAG", "File Saved::--->" + f.getAbsolutePath());
             fo.close();
             return f.getAbsolutePath();
         }
@@ -320,4 +316,7 @@ public class GalleryHomepage extends AppCompatActivity implements ImageAdapter.C
         Intent backToHomescreen = new Intent(this,HomeScreen.class);
         this.startActivity(backToHomescreen);
     }
+
+
+
 }

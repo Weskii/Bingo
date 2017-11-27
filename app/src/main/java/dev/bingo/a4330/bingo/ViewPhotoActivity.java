@@ -25,11 +25,11 @@ public class ViewPhotoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.viewphoto);
 
-        //gets the imagepath passed in the intent bundle, extracts the bitmap and sets the image to display in the view
+        //gets the image path passed in the intent bundle, extracts the bitmap and sets the image to display in the view
         Intent intent = getIntent();
         String path = intent.getStringExtra("filepath");
         final ImageView imageView = (ImageView) findViewById(R.id.ZoomView);
-        //compresses the bitmap before being shown so it
+        //compresses the bitmap before being shown so it is not too large
         BitmapFactory.Options options = new BitmapFactory.Options();
         FileInputStream is = null;
         File imageFile = new File(path);
@@ -43,6 +43,9 @@ public class ViewPhotoActivity extends AppCompatActivity {
         }
         options.inSampleSize = 2;
         Bitmap imageBitmap = BitmapFactory.decodeStream(is, null, options);
+
+
+         //rotates the image to the correct
         try {
             ExifInterface exif = new ExifInterface(path);
             int orientation = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION,ExifInterface.ORIENTATION_UNDEFINED);
