@@ -9,16 +9,23 @@ import android.view.View;
 import android.view.Window;
 import android.widget.EditText;
 
-public class HomeScreen extends AppCompatActivity {
+import com.google.gson.Gson;
 
+public class HomeScreen extends AppCompatActivity {
+    Dog curDog;
+    Gson gson=new Gson();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        String jDog=getIntent().getStringExtra("jDog");
+        curDog=gson.fromJson(jDog, Dog.class);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_screen);
     }
 
     public void activityButton(View view) {
         Intent activityLog = new Intent(this, activityLog.class);
+        String jDog=gson.toJson(curDog);
+        activityLog.putExtra("jDog", jDog);
         startActivity(activityLog);
     }
 

@@ -14,48 +14,36 @@ import android.util.Log;
 public class GPSTracker extends activityLog implements LocationListener {
 
     private final Context mContext;
-    boolean isGPSEnabled = false; // flag for GPS status
-    boolean isNetworkEnabled = false; // flag for network status
-    boolean canGetLocation = false; // flag for GPS status
-
-    Location location; // location
+    //Flags to check for ability to track location
+    boolean isGPSEnabled = false;
+    boolean isNetworkEnabled = false;
+    boolean canGetLocation = false;
+    Location location; // location to store
     double latitude; // latitude
     double longitude; // longitude
-
-    // The minimum distance to change Updates in meters
-    private static final long MIN_DISTANCE_CHANGE_FOR_UPDATES = 10; // 10 meters
-
-    // The minimum time between updates in milliseconds
-    private static final long MIN_TIME_BW_UPDATES = 1000 * 10; // 10 seconds
-
     // Declaring a Location Manager
     protected LocationManager locationManager;
 
     public GPSTracker(Context context) {
         this.mContext = context;
-        getLocation();
+        location=recordLocation();
     }
 
-    public Location getLocation() {
+    public Location recordLocation() {
         try {
-            locationManager = (LocationManager) mContext
-                    .getSystemService(LOCATION_SERVICE);
-
+            //getting handle on the GPS subsystem
+            locationManager = (LocationManager) mContext.getSystemService(LOCATION_SERVICE);
             // getting GPS status
-            isGPSEnabled = locationManager
-                    .isProviderEnabled(LocationManager.GPS_PROVIDER);
-
+            isGPSEnabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
             // getting network status
-            isNetworkEnabled = locationManager
-                    .isProviderEnabled(LocationManager.NETWORK_PROVIDER);
-
+            isNetworkEnabled = locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
             if (!isGPSEnabled && !isNetworkEnabled) {
                 // no network provider is enabled
             } else {
                 this.canGetLocation = true;
                 // First get location from Network Provider
                 if (isNetworkEnabled) {
-                    locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER,MIN_TIME_BW_UPDATES,MIN_DISTANCE_CHANGE_FOR_UPDATES, this);
+                    locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER,10000,10, this);
                     Log.d("Network", "Network");
                     if (locationManager != null) {
                         location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
@@ -69,13 +57,10 @@ public class GPSTracker extends activityLog implements LocationListener {
                 if (isGPSEnabled) {
                     if (location == null) {
                         locationManager.requestLocationUpdates(
-                                LocationManager.GPS_PROVIDER,
-                                MIN_TIME_BW_UPDATES,
-                                MIN_DISTANCE_CHANGE_FOR_UPDATES, this);
+                                LocationManager.GPS_PROVIDER,10000,10, this);
                         Log.d("GPS Enabled", "GPS Enabled");
                         if (locationManager != null) {
-                            location = locationManager
-                                    .getLastKnownLocation(LocationManager.GPS_PROVIDER);
+                            location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
                             if (location != null) {
                                 latitude = location.getLatitude();
                                 longitude = location.getLongitude();
@@ -85,7 +70,7 @@ public class GPSTracker extends activityLog implements LocationListener {
                 }
             }
         } catch (SecurityException e) {
-            //do nothing with this exception because we check for these permissions in trackWalk.java;
+            //do nothing with this exception because we check for these permissions in trackWalk.java
         }
         return location;
     }
@@ -160,6 +145,14 @@ public class GPSTracker extends activityLog implements LocationListener {
 
         // Showing Alert Message
         alertDialog.show();
+    }
+
+    public Location getLocation(){
+        return location;
+    }
+
+    public Location newLocation(){
+        return recordLocation();
     }
 
     @Override

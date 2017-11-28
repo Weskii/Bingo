@@ -9,7 +9,15 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.gson.Gson;
+
+import java.util.ArrayList;
+import java.util.Date;
 
 import static android.Manifest.permission.ACCESS_FINE_LOCATION;
 import static android.Manifest.permission.CAMERA;
@@ -18,54 +26,78 @@ import static android.Manifest.permission.READ_EXTERNAL_STORAGE;
 import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
 
 public class activityLog extends AppCompatActivity {
-
-    final int RequestPermissionCode = 0;
+    Gson gson=new Gson();
+    Dog curDog;
+    float totalDistance;
+    final TextView txtDistance = (TextView) findViewById(R.id.totalDistance);
+    ListView actListView=(ListView) findViewById(R.id.actLog);
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_log);
+        String jDog=getIntent().getStringExtra("jDog");
+        curDog=gson.fromJson(jDog, Dog.class);
+        totalDistance=0;
+        ArrayList<Activity> actList=curDog.getActList();
+        //remove entries older than 7 days
+        for(Activity act:actList){
+            if(new Date().getTime()-act.getDate().getTime()>604800000) actList.remove(act);
+        }
+        for(Activity act:actList){totalDistance+=act.getMiles();}
+        txtDistance.setText(String.format("%.2f mi%n this week",String.valueOf(totalDistance)));
+        ArrayAdapter<Activity> actListAdapter=new ArrayAdapter<Activity>(this,android.R.layout.simple_list_item_1,actList);
+        actListView.setAdapter(actListAdapter);
     }
 
     public void trackWalkButton(View view){
         //check for GPS and Internet permissions for location tracking
         checkPermissions();
         Intent trackWalk = new Intent(this, activityLog.class);
+        String jDog=gson.toJson(curDog);
+        trackWalk.putExtra("jDog", jDog);
         startActivity(trackWalk);
     }
 
-    /*Checks to see if the user has accepted camera and read/write permissions, if so the dialog window prompting users to choose a photo or take a photo is
-          shown, if not then the app requests permissions */
-    private void checkPermissions() {
-        if (!checkAllPermission()) requestPermission();
+    public void addActivity(View view){
+
     }
 
-    //used in the default check permissions call, returns true if all permissions are already accepted when the user clicks "Add Image".
+    //=================
+    //Permissions Block
+    //=================
+    //Checks to see if the user has accepted location permissions
+    private void checkPermissions() {if (!checkAllPermission()) requestPermission();}
+    //used in the default check permissions call, returns true if all permissions are already accepted
     public boolean checkAllPermission() {
         int FirstPermissionResult = ContextCompat.checkSelfPermission(getApplicationContext(), ACCESS_FINE_LOCATION);
         int SecondPermissionResult = ContextCompat.checkSelfPermission(getApplicationContext(), INTERNET);
         return FirstPermissionResult == PackageManager.PERMISSION_GRANTED && SecondPermissionResult == PackageManager.PERMISSION_GRANTED;
     }
-
-    // requests GPS and Internet permissions from the user for location tracking
+    //requests GPS and Internet permissions from the user for location tracking
     private void requestPermission() {
         String[] PERMISSIONS = { Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.INTERNET};
-        ActivityCompat.requestPermissions(this, PERMISSIONS, RequestPermissionCode);
-
+        ActivityCompat.requestPermissions(this, PERMISSIONS, 0);
     }
-
-    /* after permissions are requested, this method checks to see if they were accepted. If so the dialog window prompting users to choose or take a photo is shown,
-    otherwise, a message is displayed. */
+    //after permissions are requested, this method checks to see if they were accepted
     @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults)
-    {
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (grantResults.length > 0)
-        {
+        if (grantResults.length > 0) {
             //checks to see if each permission was granted individually
             boolean fineLocationPerm = grantResults[0] == PackageManager.PERMISSION_GRANTED;
             boolean internetPerm = grantResults[1] == PackageManager.PERMISSION_GRANTED;
             //checks to see if all permissions were accepted. If so, show dialog. If not, display a message.
             if (!fineLocationPerm && !internetPerm) Toast.makeText(this, "You must accept all permissions to track walks.", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    //overrides the back button in order to return the user to the homescreen
+    @Override
+    public void onBackPressed()
+    {moveTaskToBack(true);
+    Intent backToHomescreen = new Intent(this,HomeScreen.class);
+    String jDog=gson.toJson(curDog);
+    backToHomescreen.putExtra("jDog", jDog);
+    this.startActivity(backToHomescreen);
     }
 }
