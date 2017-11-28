@@ -4,4 +4,5 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
     <color name="BackgroundColor">#e7f1ff</color>
+    <color name="BingoText">#737373</color>
 </resources>

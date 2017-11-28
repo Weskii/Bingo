@@ -1,5 +1,6 @@
 package dev.bingo.a4330.bingo;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -55,17 +56,10 @@ public class Activity {
         time = t;
     }
     //converting seconds to minutes string
-    public static String secToMin(String t){
-        int timeMin=Integer.parseInt(time);
-        int timeSecs=Integer.parseInt(time);
-        timeMin=timeSecs%60;
-        timeSecs=timeSecs-(timeMin*60);
-        return String.valueOf(timeMin)+":"+String.valueOf(timeSecs);
-    }
 
     @Override
     public String toString() {
-        if(miles==0) return String.format("%s%n%for %s",actName,secToMin(time));
-        return String.format("%s%n%.2f in %s",actName,miles,secToMin(time));
+        if(miles==0) return String.format("%s for %s minutes",actName,time);
+        return String.format("%s for %.2f miles in %s",actName,miles,time);
     }
 }

@@ -26,7 +26,6 @@ public class GPSTracker extends activityLog implements LocationListener {
 
     public GPSTracker(Context context) {
         this.mContext = context;
-        location=recordLocation();
     }
 
     public Location recordLocation() {

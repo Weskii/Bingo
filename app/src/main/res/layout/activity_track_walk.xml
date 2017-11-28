@@ -6,32 +6,6 @@
     android:layout_height="match_parent"
     tools:context="dev.bingo.a4330.bingo.trackWalk">
 
-    <com.google.android.gms.maps.MapView
-        android:id="@+id/mapView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/time"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="32dp"
-        android:fontFamily="@font/odin_rounded"
-        android:text="12:54"
-        android:textAlignment="center"
-        android:textSize="64sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/mapView" />
-
     <ImageButton
         android:id="@+id/pauseButton"
         android:layout_width="150dp"
@@ -40,10 +14,11 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
         android:background="@android:color/transparent"
+        android:onClick="pauseWalkButton"
         android:scaleType="fitXY"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/time"
+        app:layout_constraintTop_toBottomOf="@+id/chrono"
         app:srcCompat="@drawable/red_run" />
 
     <ImageButton
@@ -54,6 +29,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="128dp"
         android:background="@android:color/transparent"
+        android:onClick="stopWalkButton"
         android:scaleType="fitCenter"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
@@ -71,4 +47,18 @@
         android:textSize="36sp"
         app:layout_constraintStart_toStartOf="@+id/pauseButton"
         app:layout_constraintTop_toBottomOf="@+id/pauseButton" />
+
+    <Chronometer
+        android:id="@+id/chrono"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="32dp"
+        android:fontFamily="@font/odin_rounded"
+        android:textColor="@color/BingoText"
+        android:textSize="36sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </android.support.constraint.ConstraintLayout>

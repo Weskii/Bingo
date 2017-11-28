@@ -10,7 +10,7 @@ public class Dog {
     static String dogName, dogWeight;
     Boolean active;
     public String profPic;
-    ArrayList<Activity> actList=new ArrayList<>();
+    public ArrayList<Activity> actList=new ArrayList<>();
 
     public Dog(String name, String weight){
         dogName = name;
@@ -26,5 +26,4 @@ public class Dog {
     public String getWeight(){return dogWeight;}
     public Boolean getActive(){return active;}
     public String getProfPic(){return profPic;}
-    public ArrayList<Activity> getActList(){return actList;}
 }
