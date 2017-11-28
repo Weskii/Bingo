@@ -39,11 +39,11 @@
 
 
 
-        <activity android:name=".activityLog" />
+        <activity android:name=".activityLog"></activity>
+        <activity android:name=".HomeScreen"></activity>
         <activity android:name=".trackWalk"></activity>
         <activity android:name=".ViewPhotoActivity"></activity>
         <activity android:name=".GalleryHomepage"></activity>
-        <activity android:name=".trackWalk" />
         <activity android:name=".ImageViewer"></activity>
     </application>
 
