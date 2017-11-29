@@ -21,6 +21,8 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -80,7 +82,10 @@ public class activityLog extends AppCompatActivity {
                 TextView actTime=inflateView.findViewById(R.id.activityTime);
                 String actNameStr=actName.getText().toString();
                 String actTimeStr=actTime.getText().toString();
-                curDog.actList.add(new Activity(actNameStr,actTimeStr,new Date()));
+                Date today=new Date();
+                DateFormat df=new SimpleDateFormat("MMM dd");
+                String todayString=df.format(today);
+                curDog.actList.add(new Activity(actNameStr,actTimeStr,today,todayString));
             }
         });
         builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -128,6 +133,7 @@ public class activityLog extends AppCompatActivity {
     Intent backToHomescreen = new Intent(this,HomeScreen.class);
     String jDog=gson.toJson(curDog);
     backToHomescreen.putExtra("jDog", jDog);
+    backToHomescreen.putExtra("sendingIntent","activityLog");
     this.startActivity(backToHomescreen);
     }
 }
