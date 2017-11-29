@@ -167,8 +167,9 @@ public class trackWalk extends AppCompatActivity implements
         }
     }
 
-    private void setUpMap(){
-        mMap.addMarker(new MarkerOptions().position(new LatLng(0,0)).title("Start"));
+    private void setUpMap()
+    {
+
     }
 
     private void setUpMapIfNeeded() {

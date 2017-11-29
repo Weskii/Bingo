@@ -29,7 +29,6 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ViewHolder>
 
 
     private static File imagesFile;
-    View ImageView;
     //an interface used to create the onclick listener for the recyclerview
     public interface Callback
     {
@@ -76,7 +75,6 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ViewHolder>
        Bitmap imageBitmap = BitmapFactory.decodeStream(is, null, options);
 
        //calls an exif interface to display the correct orientation of the image based on Exif data
-
         try {
             ExifInterface exif = new ExifInterface(imageFile.getAbsolutePath());
            int orientation = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION,ExifInterface.ORIENTATION_UNDEFINED);

@@ -43,7 +43,6 @@ public class GalleryHomepage extends AppCompatActivity implements ImageAdapter.C
     private ImageButton addPhotosButton;
     private int GALLERY = 1,
             CAMERAINTENT = 0;
-    final int RequestPermissionCode = 0;
     private String galleryLocation = "BingoAppGallery";
     public File storageDirectory = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
     public File BingoGalleryFolder = new File(storageDirectory,galleryLocation);
@@ -77,7 +76,7 @@ public class GalleryHomepage extends AppCompatActivity implements ImageAdapter.C
         RecyclerView.Adapter imageAdapter = new ImageAdapter(BingoGalleryFolder,this);
         recycleView.setAdapter(imageAdapter);
     }
-
+    //displays a dialog window that gives the user the option to import from the gallery or take a photo from the camera
     private void showDialog()
     {
         AlertDialog.Builder pictureDialog = new AlertDialog.Builder(this);
@@ -86,10 +85,13 @@ public class GalleryHomepage extends AppCompatActivity implements ImageAdapter.C
                 "Select photo from gallery",
                 "Capture photo from camera" };
         pictureDialog.setItems(pictureDialogItems,
-                new DialogInterface.OnClickListener() {
+                new DialogInterface.OnClickListener()
+                {
                     @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        switch (which) {
+                    public void onClick(DialogInterface dialog, int which)
+                    {
+                        switch (which)
+                        {
                             case 0:
 
                                 choosePhotoFromGallery();
@@ -166,9 +168,10 @@ public class GalleryHomepage extends AppCompatActivity implements ImageAdapter.C
     //handles the case in the dialog switch in which the user opts to take a photo.
     private void takePhotoFromCamera()
     {
+        //camera intent is created, calling the Action Image Capture from the MediaStore class
         Intent callCameraApplicationIntent = new Intent();
         callCameraApplicationIntent.setAction(MediaStore.ACTION_IMAGE_CAPTURE);
-
+        //calls the create image file and handles for failure
         File photoFile = null;
         try {
             photoFile = createImageFile();
@@ -176,11 +179,11 @@ public class GalleryHomepage extends AppCompatActivity implements ImageAdapter.C
         } catch (IOException e) {
             e.printStackTrace();
         }
+        //gets the Uri (image taken), stores the image, scans so it is visible in the gallery  and starts the activityForResult.
         String authority = getApplicationContext().getPackageName()+ ".fileprovider";
         Uri imageUri = FileProvider.getUriForFile(this,authority,photoFile);
         callCameraApplicationIntent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
         MediaScannerConnection.scanFile(this, new String[] { photoFile.getPath() }, new String[] { "image/jpeg" }, null);
-
         startActivityForResult(callCameraApplicationIntent, CAMERAINTENT);
 
     }
@@ -250,12 +253,12 @@ public class GalleryHomepage extends AppCompatActivity implements ImageAdapter.C
         BingoGalleryFolder = new File(storageDirectory,galleryLocation);
         if(!BingoGalleryFolder.exists())
             BingoGalleryFolder.mkdirs();
-
+        //gets image path from the file in the directory and returns the image file for use in takePhotoFromCamera()
         File cameraImage = File.createTempFile(imageFileName,".jpg", BingoGalleryFolder);
         currentPath = cameraImage.getAbsolutePath();
         return cameraImage;
     }
-
+    //saves the image from the gallery in the Bingo directory
     public String saveGalleryImage(Bitmap myBitmap)
     {
 

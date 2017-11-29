@@ -45,7 +45,7 @@ public class ViewPhotoActivity extends AppCompatActivity {
         Bitmap imageBitmap = BitmapFactory.decodeStream(is, null, options);
 
 
-         //rotates the image to the correct
+         //rotates the image to the correct orientation
         try {
             ExifInterface exif = new ExifInterface(path);
             int orientation = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION,ExifInterface.ORIENTATION_UNDEFINED);
@@ -79,7 +79,7 @@ public class ViewPhotoActivity extends AppCompatActivity {
 
 
 
-
+        //ensures the profile photo is changed when the button is clicked
         ChangeProfileButton = findViewById(R.id.profileButton);
         ChangeProfileButton.setOnClickListener(new View.OnClickListener() {
             //Changes the user's profile photo when the button is clicked, and returns the user to the gallery homescreen
