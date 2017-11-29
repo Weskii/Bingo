@@ -52,6 +52,8 @@
         <activity android:name=".ImageViewer" />
         <activity android:name=".healthList" />
         <activity android:name=".dogList" />
+        <activity android:name=".AddDog"/>
+        <activity android:name=".AddHealth"/>
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"

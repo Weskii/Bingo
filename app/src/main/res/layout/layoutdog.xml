@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical" >
@@ -9,7 +10,9 @@
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_marginRight="10dp"
-        android:contentDescription="Profile Pic" />
+        android:contentDescription="Profile Pic"
+        app:srcCompat="@drawable/bingo_bg" />
+
     <TextView
         android:id="@+id/dogId"
         android:layout_width="25dp"
@@ -18,14 +21,15 @@
         android:layout_alignParentTop="true"
         android:layout_marginRight="6dp"
         android:padding="3dp"
-        android:visibility="visible" />
+        android:visibility="invisible" />
 
     <TextView
         android:id="@+id/dogName"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_toRightOf="@id/dogId"
+        android:layout_alignBaseline="@+id/dogId"
+        android:layout_alignBottom="@+id/dogId"
+        android:layout_toEndOf="@+id/image"
         android:maxLines="1"
         android:padding="3dp"
         android:textSize="17sp"
@@ -35,12 +39,20 @@
         android:id="@+id/dogWeight"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/dogName"
-        android:layout_marginLeft="10dp"
-        android:layout_toRightOf="@id/dogId"
+        android:layout_below="@+id/dogId"
+        android:layout_toEndOf="@+id/image"
         android:ellipsize="end"
         android:maxLines="2"
         android:padding="3dp"
         android:visibility="visible" />
+
+    <RadioButton
+        android:id="@+id/radioButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@+id/dogWeight"
+        android:layout_marginEnd="16dp"
+        android:text="Active" />
 
 </RelativeLayout>

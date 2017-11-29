@@ -17,6 +17,11 @@ android {
         }
     }
 }
+android {
+    defaultConfig {
+        multiDexEnabled true
+    }
+}
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
