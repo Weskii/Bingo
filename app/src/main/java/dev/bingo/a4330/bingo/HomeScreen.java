@@ -8,17 +8,28 @@ import android.view.MenuInflater;
 import android.view.View;
 import android.view.Window;
 import android.widget.EditText;
+import android.widget.TextView;
+
+import com.google.gson.Gson;
 
 public class HomeScreen extends AppCompatActivity {
-
+    //to be changed, testing for Westen
+    Dog curDog=new Dog("Jack","80");
+    Gson gson=new Gson();
+    //TextView dogName=(TextView) findViewById(R.id.Dog_name);
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        //String jDog=getIntent().getStringExtra("jDog");
+        //curDog=gson.fromJson(jDog, Dog.class);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_screen);
+        //dogName.setText(curDog.getName());
     }
 
     public void activityButton(View view) {
         Intent activityLog = new Intent(this, activityLog.class);
+        String jDog=gson.toJson(curDog);
+        activityLog.putExtra("jDog", jDog);
         startActivity(activityLog);
     }
 
@@ -27,5 +38,7 @@ public class HomeScreen extends AppCompatActivity {
         startActivity(gallery);
     }
 
-
+    //overrides the back button in order to return the user to the homescreen
+    @Override
+    public void onBackPressed() {/*do nothing*/}
 }

@@ -1,15 +1,20 @@
 package dev.bingo.a4330.bingo;
 
+import android.app.Activity;
+import android.os.Bundle;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+
 /**
  * Created by Laila on 11/24/2017.
  */
 
-public class VetVisit {
+public class healthEntry {
 
 
-    public static String appName, date, notes, time;
+    public String appName, date, notes, time;
 
-    public VetVisit(String name, String d, String n, String t){
+    public healthEntry(String name, String d, String n, String t){
         appName = name;
         date = d;
         notes = n;
@@ -17,7 +22,7 @@ public class VetVisit {
     }
 
 
-    public static void setTime(String t){
+    public void setTime(String t){
         time = t;
     }
 
@@ -25,21 +30,21 @@ public class VetVisit {
         return time;
     }
 
-    public static void setAppName(String name){
+    public void setAppName(String name){
         appName = name;
     }
     public String getAppointment(){
         return appName;
     }
 
-    public static void setDate(String d){
+    public void setDate(String d){
         date = d;
     }
     public String getDate(){
         return date;
     }
 
-    public static void setNotes(String n){
+    public void setNotes(String n){
         notes = n;
     }
     public String getNotes(){

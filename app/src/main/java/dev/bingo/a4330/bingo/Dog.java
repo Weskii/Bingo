@@ -1,4 +1,5 @@
 package dev.bingo.a4330.bingo;
+import java.util.ArrayList;
 
 /**
  * Created by Laila on 11/24/2017.
@@ -7,33 +8,27 @@ package dev.bingo.a4330.bingo;
 public class Dog {
 
     static String dogName, dogWeight;
-    Boolean active;
+    Boolean isActive;
     public String profPic;
+    public ArrayList<Activity> actList=new ArrayList<>();
+    public ArrayList<VetVisit> vList = new ArrayList<>();
+
+    public Dog(){
+        super();
+    }
 
     public Dog(String name, String weight){
+        this.dogName = name;
+        this.dogWeight = weight;
+        this.isActive = false;
+    }
+
+    public void setName(String name){
         dogName = name;
-        dogWeight = weight;
-        active = true;
     }
-
-    public static void setName(String name){
-        dogName = name;
-    }
-    public String getName(){
-        return dogName;
-    }
-    public static void setWeight(String weight){
-        dogWeight = weight;
-    }
-
-    public String getWeight(){
-        return dogWeight;
-    }
-    public Boolean getActive(){
-        return active;
-    }
-
-    public String getProfPic(){
-        return profPic;
-    }
+    public String getPetName(){return dogName;}
+    public void setWeight(String weight){dogWeight = weight;}
+    public String getPetWeight(){return dogWeight;}
+    public Boolean getActive(){return isActive;}
+    public String getProfPic(){return profPic;}
 }
