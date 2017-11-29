@@ -2,19 +2,26 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="dev.bingo.a4330.bingo">
 
-
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />//added by megan
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" /> //added by megan
-    <uses-permission android:name="android.permission.CAMERA" /> //added by megan
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" /> //added by westen
-    <uses-permission android:name="android.permission.INTERNET" /> //added by westen
-    <uses-feature android:name="android.hardware.camera" android:required="false" /> //added by megan
-     //large heap added
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    //added by megan
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    //added by megan
+    <uses-permission android:name="android.permission.CAMERA" />
+    //added by megan
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    //added by westen
+    <uses-permission android:name="android.permission.INTERNET" />
+    //added by westen
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="false" />
+    //added by megan
+    //large heap added
     <application
-        android:largeHeap="true"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/bingo_clear"
         android:label="@string/app_name"
+        android:largeHeap="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
@@ -35,16 +42,19 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/filepaths" />
             >
-        </provider> //all of the provider was added by megan
+        </provider>
+        //all of the provider was added by megan
+        <activity android:name=".activityLog" />
+        <activity android:name=".HomeScreen" />
+        <activity android:name=".trackWalk" />
+        <activity android:name=".ViewPhotoActivity" />
+        <activity android:name=".GalleryHomepage" />
+        <activity android:name=".ImageViewer" />
 
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyCIFD8eINgs0YGJzUi8L55grhTWssWuVpM" />
 
-
-        <activity android:name=".activityLog"></activity>
-        <activity android:name=".HomeScreen"></activity>
-        <activity android:name=".trackWalk"></activity>
-        <activity android:name=".ViewPhotoActivity"></activity>
-        <activity android:name=".GalleryHomepage"></activity>
-        <activity android:name=".ImageViewer"></activity>
     </application>
 
 </manifest>

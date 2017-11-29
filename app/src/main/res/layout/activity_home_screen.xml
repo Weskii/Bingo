@@ -18,7 +18,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/bingo_clear" />
+        app:srcCompat="@drawable/bingo_bg" />
 
     <ImageButton
         android:id="@+id/imageButton"

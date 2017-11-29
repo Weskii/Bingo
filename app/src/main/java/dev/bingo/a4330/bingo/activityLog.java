@@ -1,13 +1,18 @@
 package dev.bingo.a4330.bingo;
 
 import android.Manifest;
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.os.SystemClock;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -29,37 +34,61 @@ public class activityLog extends AppCompatActivity {
     Gson gson=new Gson();
     Dog curDog;
     float totalDistance;
-    final TextView txtDistance = (TextView) findViewById(R.id.totalDistance);
-    ListView actListView=(ListView) findViewById(R.id.actLog);
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_log);
+
+        final TextView txtDistance =findViewById(R.id.totalDistance);
         String jDog=getIntent().getStringExtra("jDog");
         curDog=gson.fromJson(jDog, Dog.class);
         totalDistance=0;
-        ArrayList<Activity> actList=curDog.getActList();
         //remove entries older than 7 days
-        for(Activity act:actList){
-            if(new Date().getTime()-act.getDate().getTime()>604800000) actList.remove(act);
+        for(Activity act:curDog.actList){
+            if(SystemClock.elapsedRealtime()-act.getDate().getTime()>604800000) curDog.actList.remove(act);
         }
-        for(Activity act:actList){totalDistance+=act.getMiles();}
-        txtDistance.setText(String.format("%.2f mi%n this week",String.valueOf(totalDistance)));
-        ArrayAdapter<Activity> actListAdapter=new ArrayAdapter<Activity>(this,android.R.layout.simple_list_item_1,actList);
+        for(Activity act:curDog.actList){totalDistance+=act.getMiles();}
+        txtDistance.setText(String.format("%.2fmi",totalDistance));
+        ArrayAdapter<Activity> actListAdapter=new ArrayAdapter<>(this,android.R.layout.simple_list_item_1,curDog.actList);
+        ListView actListView=findViewById(R.id.actLog);
         actListView.setAdapter(actListAdapter);
     }
 
-    public void trackWalkButton(View view){
+    public void trackWalkButtonPermissions(View view){
         //check for GPS and Internet permissions for location tracking
-        checkPermissions();
-        Intent trackWalk = new Intent(this, activityLog.class);
-        String jDog=gson.toJson(curDog);
+        if(!checkAllPermission()) checkPermissions();
+        else trackWalkButton();
+    }
+
+    public void trackWalkButton(){
+        Intent trackWalk = new Intent(this, trackWalk.class);
+        String jDog = gson.toJson(curDog);
         trackWalk.putExtra("jDog", jDog);
         startActivity(trackWalk);
     }
 
     public void addActivity(View view){
-
+        AlertDialog.Builder builder=new AlertDialog.Builder(this);
+        final LayoutInflater inflater=this.getLayoutInflater();
+        final View inflateView=inflater.inflate(R.layout.other_activity_dialog,null);
+        builder.setView(inflateView);
+        builder.setTitle("Other Activity");
+        builder.setPositiveButton("Add", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                TextView actName=inflateView.findViewById(R.id.activityName);
+                TextView actTime=inflateView.findViewById(R.id.activityTime);
+                String actNameStr=actName.getText().toString();
+                String actTimeStr=actTime.getText().toString();
+                curDog.actList.add(new Activity(actNameStr,actTimeStr,new Date()));
+            }
+        });
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {}
+        });
+        builder.create();
+        builder.show();
     }
 
     //=================
@@ -87,7 +116,8 @@ public class activityLog extends AppCompatActivity {
             boolean fineLocationPerm = grantResults[0] == PackageManager.PERMISSION_GRANTED;
             boolean internetPerm = grantResults[1] == PackageManager.PERMISSION_GRANTED;
             //checks to see if all permissions were accepted. If so, show dialog. If not, display a message.
-            if (!fineLocationPerm && !internetPerm) Toast.makeText(this, "You must accept all permissions to track walks.", Toast.LENGTH_SHORT).show();
+            if (fineLocationPerm && internetPerm) trackWalkButton();
+            else Toast.makeText(this, "You must accept all permissions to track walks.", Toast.LENGTH_SHORT).show();
         }
     }
 
