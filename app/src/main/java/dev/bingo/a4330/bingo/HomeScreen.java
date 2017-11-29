@@ -13,17 +13,14 @@ import android.widget.TextView;
 import com.google.gson.Gson;
 
 public class HomeScreen extends AppCompatActivity {
-    //to be changed, testing for Westen
-    Dog curDog=new Dog("Jack","80");
+    Dog curDog=new Dog("jack","80");
     Gson gson=new Gson();
-    //TextView dogName=(TextView) findViewById(R.id.Dog_name);
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        //String jDog=getIntent().getStringExtra("jDog");
-        //curDog=gson.fromJson(jDog, Dog.class);
+        TextView dogName=findViewById(R.id.dogName);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_screen);
-        //dogName.setText(curDog.getName());
+        //dogName.setText(curDog.getPetName());
     }
 
     public void activityButton(View view) {

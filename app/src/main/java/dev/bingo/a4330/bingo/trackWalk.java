@@ -23,6 +23,9 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.gson.Gson;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class trackWalk extends AppCompatActivity implements
@@ -93,7 +96,10 @@ public class trackWalk extends AppCompatActivity implements
     public void stopWalkButton(View view){
         //record new activity in dog's list
         dMiles=metersToMiles(dMeters);
-        Activity newAct=new Activity("Walk",chrono.getText().toString(),new Date(),dMiles);
+        Date today=new Date();
+        DateFormat df=new SimpleDateFormat("MMM dd");
+        String todayString=df.format(today);
+        Activity newAct=new Activity("Walk",chrono.getText().toString(),today,todayString,dMiles);
         curDog.actList.add(newAct);
         //return to log
         Intent returnToLog=new Intent(this,activityLog.class);

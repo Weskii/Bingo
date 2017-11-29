@@ -10,41 +10,31 @@ import java.util.Date;
 public class Activity {
 
     public double miles=0;
-    public String actName, time;
+    public String actName, time, dateString;
     public Date date;
 
     //new activity with length of time and date
-    public Activity(String name, String t, Date d){
+    public Activity(String name, String t, Date d, String dS){
         actName = name;
         time = t;
         date = d;
+        dateString=dS;
     }
 
     //new activity for the GPS walking function
-    public Activity(String name, String t, Date d, double m){
+    public Activity(String name, String t, Date d, String dS, double m){
         actName = name;
         time = t;
         date = d;
+        dateString=dS;
         miles = m;
     }
 
     public double getMiles(){return miles;}
-    public String getActName(){
-        return actName;
-    }
-    public void setActName(String name){
-        actName = name;
-    }
-    public Date getDate(){
-        return date;
-    }
-    public void setDate(Date d){
-        date = d;
-    }
-    //function for getting a time from a function
-    public String getTime(){
-        return time;
-    }
+    public String getActName(){return actName;}
+    public Date getDate(){return date;}
+    public String getDateString(){return dateString;}
+    public String getTime(){return time;}
 
     //function for adding a time to an already existing activity
     public void setTime(String t){
@@ -54,7 +44,7 @@ public class Activity {
 
     @Override
     public String toString() {
-        if(miles==0) return String.format("%s for %s minutes",actName,time);
-        return String.format("%s for %.2f miles in %s",actName,miles,time);
+        if(miles==0) return String.format("%s%n%s for %s minutes",dateString,actName,time);
+        return String.format("%s for %.2f miles in %s",dateString,actName,miles,time);
     }
 }
