@@ -9,9 +9,9 @@ import java.util.Date;
 
 public class Activity {
 
-    public static double miles=0;
-    public static String actName, time;
-    public static Date date;
+    public double miles=0;
+    public String actName, time;
+    public Date date;
 
     //new activity with length of time and date
     public Activity(String name, String t, Date d){
@@ -28,22 +28,17 @@ public class Activity {
         miles = m;
     }
 
-    public double getMiles(){
-        return miles;
-    }
-    public static void setMiles(float m){
-        miles = m;
-    }
+    public double getMiles(){return miles;}
     public String getActName(){
         return actName;
     }
-    public static void setActName(String name){
+    public void setActName(String name){
         actName = name;
     }
     public Date getDate(){
         return date;
     }
-    public static void setDate(Date d){
+    public void setDate(Date d){
         date = d;
     }
     //function for getting a time from a function
@@ -52,7 +47,7 @@ public class Activity {
     }
 
     //function for adding a time to an already existing activity
-    public static void setTime(String t){
+    public void setTime(String t){
         time = t;
     }
     //converting seconds to minutes string

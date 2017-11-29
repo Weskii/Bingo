@@ -11,7 +11,6 @@ public class Dog {
     Boolean isActive;
     public String profPic;
     public ArrayList<Activity> actList=new ArrayList<>();
-    public ArrayList<VetVisit> vList = new ArrayList<>();
 
     public Dog(){
         super();

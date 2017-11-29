@@ -50,6 +50,8 @@
         <activity android:name=".ViewPhotoActivity" />
         <activity android:name=".GalleryHomepage" />
         <activity android:name=".ImageViewer" />
+        <activity android:name=".healthList" />
+        <activity android:name=".dogList" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"

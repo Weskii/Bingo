@@ -15,12 +15,13 @@ import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
-
+import android.app.ActionBar;
 
 
 
 public class dogList extends AppCompatActivity {
 
+    ActionBar aBar = getActionBar();
     private dogDBManager dogDBM;
     private SimpleCursorAdapter adapter;
     private ListView dogListView;

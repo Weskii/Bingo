@@ -38,6 +38,16 @@ public class HomeScreen extends AppCompatActivity {
         startActivity(gallery);
     }
 
+    public void healthButton(View view){
+        Intent healthLog = new Intent(this, healthList.class);
+        startActivity(healthLog);
+    }
+
+    public void listButton(View view){
+        Intent dogList=new Intent(this, dogList.class);
+        startActivity(dogList);
+    }
+
     //overrides the back button in order to return the user to the homescreen
     @Override
     public void onBackPressed() {/*do nothing*/}

@@ -4,21 +4,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/BackgroundColor"
     android:orientation="vertical"
     tools:context="dev.bingo.a4330.bingo.GalleryHomepage">
 
     <ImageButton
+        android:id="@+id/addButton"
         android:layout_width="150dp"
         android:layout_height="70dp"
-        android:id="@+id/addButton"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="40dp"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Add Image"
-        android:layout_alignParentTop="true"
         android:background="@drawable/add_photo"
-        android:layout_centerHorizontal="true"/>
+        android:scaleType="fitCenter"
+        android:text="Add Image"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/galleryRecyclerView"
