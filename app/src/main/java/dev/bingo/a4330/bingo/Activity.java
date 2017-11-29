@@ -45,6 +45,6 @@ public class Activity {
     @Override
     public String toString() {
         if(miles==0) return String.format("%s%n%s for %s minutes",dateString,actName,time);
-        return String.format("%s for %.2f miles in %s",dateString,actName,miles,time);
+        return String.format("%s%n%s for %.2f miles in %s",dateString,actName,miles,time);
     }
 }

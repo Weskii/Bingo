@@ -44,7 +44,7 @@
             >
         </provider>
         //all of the provider was added by megan
-        <activity android:name=".activityLog" />
+        <activity android:name=".activityLog"/>
         <activity android:name=".HomeScreen" />
         <activity android:name=".trackWalk" />
         <activity android:name=".ViewPhotoActivity" />
