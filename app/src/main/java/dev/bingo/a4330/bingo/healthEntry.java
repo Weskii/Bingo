@@ -1,15 +1,20 @@
 package dev.bingo.a4330.bingo;
 
+import android.app.Activity;
+import android.os.Bundle;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+
 /**
  * Created by Laila on 11/24/2017.
  */
 
-public class VetVisit {
+public class healthEntry {
 
 
     public String appName, date, notes, time;
 
-    public VetVisit(String name, String d, String n, String t){
+    public healthEntry(String name, String d, String n, String t){
         appName = name;
         date = d;
         notes = n;

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="20dp" >
+    tools:context="com.example.bingo.myapplication">
+
+    <EditText
+        android:id="@+id/name_edittext"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="name..." >
+
+        <requestFocus />
+    </EditText>
+
+    <EditText
+        android:id="@+id/date_edittext"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="date..."
+        android:inputType="date"
+        android:minLines="5"></EditText>
+
+    <EditText
+        android:id="@+id/time_edittext"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="time..."
+        android:inputType="time"
+        android:minLines="5"></EditText>
+
+    <EditText
+        android:id="@+id/notes_edittext"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="notes..."
+        android:inputType="text|textMultiLine"
+        android:minLines="5"></EditText>
+
+    <Button
+        android:id="@+id/add_health_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="add health entry" />
+
+</LinearLayout>

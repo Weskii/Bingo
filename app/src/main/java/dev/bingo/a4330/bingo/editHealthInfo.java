@@ -1,6 +1,8 @@
 package dev.bingo.a4330.bingo;
 
-
+/**
+ * Created by anupamchugh on 19/10/15.
+ */
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,29 +11,30 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 
-public class editDogInfo extends android.app.Activity implements View.OnClickListener {
+public class editHealthInfo extends Activity implements OnClickListener {
 
-    private EditText nameText;
+    private EditText nameText, dateText, timeText, notesText;
     private Button updateBtn, deleteBtn;
-    private EditText weightText;
 
     private long _id;
 
-    private dogDBManager dogDBM;
+    private healthDBManager hDBM;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setTitle("Edit Dog Info");
+        setTitle("Edit Health Entry");
 
-        setContentView(R.layout.activity_edit_dog);
+        setContentView(R.layout.activity_edit_health);
 
-        dogDBM = new dogDBManager(this);
-        dogDBM.open();
+        hDBM = new healthDBManager(this);
+        hDBM.open();
 
         nameText = (EditText) findViewById(R.id.name_edittext);
-        weightText = (EditText) findViewById(R.id.weight_edittext);
+        dateText = (EditText) findViewById(R.id.date_edittext);
+        timeText = (EditText) findViewById(R.id.time_edittext);
+        notesText = (EditText) findViewById(R.id.notes_edittext);
 
         updateBtn = (Button) findViewById(R.id.btn_update);
         deleteBtn = (Button) findViewById(R.id.btn_delete);
@@ -39,12 +42,16 @@ public class editDogInfo extends android.app.Activity implements View.OnClickLis
         Intent intent = getIntent();
         String id = intent.getStringExtra("id");
         String name = intent.getStringExtra("name");
-        String weight = intent.getStringExtra("weight");
+        String date = intent.getStringExtra("date");
+        String time = intent.getStringExtra("time");
+        String notes = intent.getStringExtra("notes");
 
         _id = Long.parseLong(id);
 
         nameText.setText(name);
-        weightText.setText(weight);
+        dateText.setText(date);
+        timeText.setText(time);
+        notesText.setText(notes);
 
         updateBtn.setOnClickListener(this);
         deleteBtn.setOnClickListener(this);
@@ -54,22 +61,24 @@ public class editDogInfo extends android.app.Activity implements View.OnClickLis
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btn_update:
-                String title = nameText.getText().toString();
-                String weight = weightText.getText().toString();
+                String name = nameText.getText().toString();
+                String date = dateText.getText().toString();
+                String time = timeText.getText().toString();
+                String notes = notesText.getText().toString();
 
-                dogDBM.update(_id, title, weight);
+                hDBM.update(_id, name, date, time, notes);
                 this.returnHome();
                 break;
 
             case R.id.btn_delete:
-                dogDBM.delete(_id);
+                hDBM.delete(_id);
                 this.returnHome();
                 break;
         }
     }
 
     public void returnHome() {
-        Intent home_intent = new Intent(getApplicationContext(), dogList.class)
+        Intent home_intent = new Intent(getApplicationContext(),healthList.class)
                 .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(home_intent);
     }
