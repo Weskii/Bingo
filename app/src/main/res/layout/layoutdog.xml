@@ -45,13 +45,5 @@
         android:padding="3dp"
         android:visibility="visible" />
 
-    <RadioButton
-        android:id="@+id/activeButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_below="@+id/dogWeight"
-        android:layout_marginEnd="16dp"
-        android:text="Active" />
 
 </RelativeLayout>
