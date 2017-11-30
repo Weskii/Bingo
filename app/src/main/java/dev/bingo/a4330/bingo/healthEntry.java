@@ -1,13 +1,10 @@
 package dev.bingo.a4330.bingo;
-
+//health entry object class
 import android.app.Activity;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-/**
- * Created by Laila on 11/24/2017.
- */
 
 public class healthEntry {
 

@@ -6,7 +6,7 @@
     android:orientation="vertical" >
 
     <ImageView
-        android:id="@+id/image"
+        android:id="@+id/profPic"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_marginRight="10dp"
@@ -27,9 +27,8 @@
         android:id="@+id/dogName"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/dogId"
-        android:layout_alignBottom="@+id/dogId"
-        android:layout_toEndOf="@+id/image"
+        android:layout_alignParentTop="true"
+        android:layout_toEndOf="@+id/profPic"
         android:maxLines="1"
         android:padding="3dp"
         android:textSize="17sp"
@@ -40,14 +39,14 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/dogId"
-        android:layout_toEndOf="@+id/image"
+        android:layout_toEndOf="@+id/profPic"
         android:ellipsize="end"
         android:maxLines="2"
         android:padding="3dp"
         android:visibility="visible" />
 
     <RadioButton
-        android:id="@+id/radioButton"
+        android:id="@+id/activeButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"

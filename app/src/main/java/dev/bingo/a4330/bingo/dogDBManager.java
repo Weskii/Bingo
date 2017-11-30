@@ -1,5 +1,5 @@
 package dev.bingo.a4330.bingo;
-
+//handles any changes made to dog database
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -18,12 +18,14 @@ public class dogDBManager {
         context = c;
     }
 
+    //opens database
     public dogDBManager open() throws SQLException {
         dbHelp = new DogDatabaseHelper(context);
         db = dbHelp.getWritableDatabase();
         return this;
     }
 
+    //closes database
     public void close(){
         dbHelp.close();
     }
@@ -35,6 +37,7 @@ public class dogDBManager {
         db.insert(DogDatabaseHelper.TABLE_NAME, null, cV);
     }
 
+    //gets information from database
     public Cursor fetch(){
         String[] columns = new String[] {
                 DogDatabaseHelper._ID, DogDatabaseHelper.NAME, DogDatabaseHelper.WEIGHT
@@ -46,6 +49,7 @@ public class dogDBManager {
         return cursor;
     }
 
+    //updates any changes made to entries in database
     public int update(long _id, String name, String weight){
         ContentValues cV = new ContentValues();
         cV.put(DogDatabaseHelper.NAME, name);
@@ -53,7 +57,7 @@ public class dogDBManager {
         int i = db.update(DogDatabaseHelper.TABLE_NAME, cV, DogDatabaseHelper._ID + " = " + _id, null);
         return i;
     }
-
+    //deletes selected dog from database
     public void delete (long _id){
         db.delete(DogDatabaseHelper.TABLE_NAME, DogDatabaseHelper._ID + "=" + _id, null);
     }

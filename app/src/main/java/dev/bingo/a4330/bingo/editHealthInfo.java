@@ -1,8 +1,5 @@
 package dev.bingo.a4330.bingo;
-
-/**
- * Created by anupamchugh on 19/10/15.
- */
+//edits health entries
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -28,17 +25,21 @@ public class editHealthInfo extends Activity implements OnClickListener {
 
         setContentView(R.layout.activity_edit_health);
 
+        //opens database
         hDBM = new healthDBManager(this);
         hDBM.open();
 
+        //sets up textboxes
         nameText = (EditText) findViewById(R.id.name_edittext);
         dateText = (EditText) findViewById(R.id.date_edittext);
         timeText = (EditText) findViewById(R.id.time_edittext);
         notesText = (EditText) findViewById(R.id.notes_edittext);
 
+        //sets up buttons
         updateBtn = (Button) findViewById(R.id.btn_update);
         deleteBtn = (Button) findViewById(R.id.btn_delete);
 
+        //creates intent from text in boxes
         Intent intent = getIntent();
         String id = intent.getStringExtra("id");
         String name = intent.getStringExtra("name");
@@ -53,6 +54,7 @@ public class editHealthInfo extends Activity implements OnClickListener {
         timeText.setText(time);
         notesText.setText(notes);
 
+        //sets up buttons
         updateBtn.setOnClickListener(this);
         deleteBtn.setOnClickListener(this);
     }
@@ -60,6 +62,7 @@ public class editHealthInfo extends Activity implements OnClickListener {
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
+            //if update button, adds any changes made
             case R.id.btn_update:
                 String name = nameText.getText().toString();
                 String date = dateText.getText().toString();
@@ -69,7 +72,7 @@ public class editHealthInfo extends Activity implements OnClickListener {
                 hDBM.update(_id, name, date, time, notes);
                 this.returnHome();
                 break;
-
+            //if delete button, gets rid of entry at that ID
             case R.id.btn_delete:
                 hDBM.delete(_id);
                 this.returnHome();
@@ -77,6 +80,7 @@ public class editHealthInfo extends Activity implements OnClickListener {
         }
     }
 
+    //goes back to home list
     public void returnHome() {
         Intent home_intent = new Intent(getApplicationContext(),healthList.class)
                 .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);

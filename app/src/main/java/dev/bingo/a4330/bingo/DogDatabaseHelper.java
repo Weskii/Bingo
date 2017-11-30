@@ -1,5 +1,5 @@
 package dev.bingo.a4330.bingo;
-
+//dog database
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 //dog database helper, handles creating the database
 public class DogDatabaseHelper extends SQLiteOpenHelper {
+    //creates table
     public static final String TABLE_NAME = "DOGS";
 
     //columns

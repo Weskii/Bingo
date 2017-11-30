@@ -1,12 +1,10 @@
 package dev.bingo.a4330.bingo;
-
+//creates health entry database
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-/**
- * Created by Laila on 11/29/2017.
- */
+
 //dog database helper, handles creating the database
 public class healthDatabaseHelper extends SQLiteOpenHelper {
     public static final String TABLE_NAME = "HEALTH_ENTRIES";

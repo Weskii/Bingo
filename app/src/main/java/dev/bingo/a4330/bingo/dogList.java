@@ -1,16 +1,18 @@
 package dev.bingo.a4330.bingo;
-
+//displays dogs in empty list, handles any interaction with the dog database
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
 import android.widget.AdapterView;
+import android.widget.CursorAdapter;
 import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.SimpleCursorAdapter;
@@ -21,21 +23,34 @@ import android.app.ActionBar;
 
 public class dogList extends AppCompatActivity {
 
+    //creates a database manager to handle updating database from here
     private dogDBManager dogDBM;
+
+    //adapter to handle each entry
     private SimpleCursorAdapter adapter;
+
+    //the actual list of entries
     private ListView dogListView;
+
+    //context of previous database
     final String[] from = new String[]{
             DogDatabaseHelper._ID, DogDatabaseHelper.NAME, DogDatabaseHelper.WEIGHT
     };
+
+    //what the new database will be
     final int[] to = new int[]{R.id.dogId, R.id.dogName, R.id.dogWeight};
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.emp_list);
 
+        //loads into an empty list
+        setContentView(R.layout.emp_list);
         dogDBM = new dogDBManager(this);
+
+        //opens database
         dogDBM.open();
+        //gets information from database
         Cursor cursor = dogDBM.fetch();
 
 
@@ -47,6 +62,7 @@ public class dogList extends AppCompatActivity {
         adapter.notifyDataSetChanged();
         dogListView.setAdapter(adapter);
 
+        //when you click on an entry, brings up current information of dog, which is editable
         dogListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long viewId) {
@@ -59,6 +75,7 @@ public class dogList extends AppCompatActivity {
                 String weight = weightTextView.getText().toString();
                 String id = IDTextView.getText().toString();
 
+                //creates an intent with dog information in it
                 Intent dogIntent = new Intent(getApplicationContext(), editDogInfo.class);
                 dogIntent.putExtra("name", name);
                 dogIntent.putExtra("weight", weight);
@@ -68,8 +85,9 @@ public class dogList extends AppCompatActivity {
 
             }
         });
-    }
 
+    }
+    //creates add button from action bar
     @Override
     public boolean onCreateOptionsMenu(Menu menu){
         getMenuInflater().inflate(R.menu.d_menu, menu);
@@ -77,6 +95,8 @@ public class dogList extends AppCompatActivity {
     }
 
     // @Override
+
+    //when the add button is selected, dog is added from intent
     public boolean onOptionsItemSelected(MenuItem item){
         int id = item.getItemId();
         if (id== R.id.add_dog){
@@ -85,4 +105,6 @@ public class dogList extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
+
 }
