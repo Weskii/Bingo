@@ -1,15 +1,19 @@
 package dev.bingo.a4330.bingo;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
+/**
+ * Created by Laila on 11/24/2017.
+ */
+
 public class Activity {
-    //These are some variables I need to initialize and store in each activity
-    //I store the date as a Date object and as a date string for easy manipulation and display
+
     public double miles=0;
     public String actName, time, dateString;
     public Date date;
 
-    //A constructor for non-walking activities, keeping miles set at 0
+    //new activity with length of time and date
     public Activity(String name, String t, Date d, String dS){
         actName = name;
         time = t;
@@ -17,7 +21,7 @@ public class Activity {
         dateString=dS;
     }
 
-    //A constructor for a walking activity, setting miles to a value
+    //new activity for the GPS walking function
     public Activity(String name, String t, Date d, String dS, double m){
         actName = name;
         time = t;
@@ -26,14 +30,18 @@ public class Activity {
         miles = m;
     }
 
-    //I need two accessors:getMiles, as it is used in the calculation of the total distance
-    //stored in the activity log.
     public double getMiles(){return miles;}
-    //getDate, as it is used in the removal of activities older than 7 days from the log
+    public String getActName(){return actName;}
     public Date getDate(){return date;}
+    public String getDateString(){return dateString;}
+    public String getTime(){return time;}
 
-    //I override the toString method to easily adapt the array list of activities in a Dog object
-    //to the list view in the activity log.
+    //function for adding a time to an already existing activity
+    public void setTime(String t){
+        time = t;
+    }
+    //converting seconds to minutes string
+
     @Override
     public String toString() {
         if(miles==0) return String.format("%s%n%s for %s minutes",dateString,actName,time);

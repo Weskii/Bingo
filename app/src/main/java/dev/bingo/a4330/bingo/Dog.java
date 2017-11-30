@@ -1,9 +1,6 @@
 package dev.bingo.a4330.bingo;
 import java.util.ArrayList;
 
-/**
- * Created by Laila on 11/24/2017.
- */
 
 public class Dog {
 

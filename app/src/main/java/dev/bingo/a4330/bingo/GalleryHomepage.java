@@ -21,7 +21,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
@@ -206,6 +205,7 @@ public class GalleryHomepage extends AppCompatActivity implements ImageAdapter.C
                 }
                 MediaScannerConnection.scanFile(this, new String[] { fdelete.getPath() }, new String[] { "image/jpeg" }, null);
             }
+
             //if the user cancels before importing a photo, the method exits without doing anything.
             else
                 return;
